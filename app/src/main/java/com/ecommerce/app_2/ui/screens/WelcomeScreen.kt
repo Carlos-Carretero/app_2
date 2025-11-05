@@ -4,22 +4,15 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -33,7 +26,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -50,9 +42,6 @@ import com.ecommerce.app_2.viewmodels.WelcomeViewModel
 fun WelcomeScreen(
     sessionManager: SessionManager,
     onLogout: () -> Unit,
-    onNavigateToProfile: () -> Unit,
-    onNavigateToUserManagement: () -> Unit,
-    onNavigateToLocationManagement: () -> Unit,
     viewModel: WelcomeViewModel = viewModel { WelcomeViewModel(sessionManager) }
 ) {
     Box(
@@ -70,14 +59,10 @@ fun WelcomeScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(24.dp)
-                .verticalScroll(rememberScrollState()),
+                .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top
+            verticalArrangement = Arrangement.Center
         ) {
-            Spacer(modifier = Modifier.height(32.dp))
-
-
             // Icono de éxito
             Icon(
                 imageVector = Icons.Default.CheckCircle,
@@ -169,69 +154,6 @@ fun WelcomeScreen(
             Spacer(modifier = Modifier.height(32.dp))
 
 
-            // Opciones disponibles para todos los usuarios
-            Text(
-                text = "Opciones Disponibles",
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.align(Alignment.Start)
-            )
-
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-
-            // Botón Mi Perfil
-            ActionButton(
-                text = "Mi Perfil",
-                icon = Icons.Default.Person,
-                description = "Editar datos personales y cambiar contraseña",
-                onClick = onNavigateToProfile
-            )
-
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-
-            // Opciones solo para administradores
-            if (viewModel.isAdmin) {
-                Text(
-                    text = "Panel de Administración",
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = Color(0xFFFF9800),
-                    modifier = Modifier.align(Alignment.Start)
-                )
-
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-
-                // Gestión de Usuarios
-                ActionButton(
-                    text = "Gestión de Usuarios",
-                    icon = Icons.Default.AccountCircle,
-                    description = "Ver y administrar usuarios del sistema",
-                    onClick = onNavigateToUserManagement
-                )
-
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-
-                // Gestión de Ubicaciones
-                ActionButton(
-                    text = "Gestión de Ubicaciones",
-                    icon = Icons.Default.LocationOn,
-                    description = "Administrar países, estados y ciudades",
-                    onClick = onNavigateToLocationManagement
-                )
-
-
-                Spacer(modifier = Modifier.height(32.dp))
-            }
-
-
             // Botón Cerrar Sesión
             OutlinedButton(
                 onClick = {
@@ -250,72 +172,6 @@ fun WelcomeScreen(
                     text = "Cerrar Sesión",
                     style = MaterialTheme.typography.bodyLarge
                 )
-            }
-
-
-            Spacer(modifier = Modifier.height(32.dp))
-        }
-    }
-}
-
-
-@Composable
-fun ActionButton(
-    text: String,
-    icon: ImageVector,
-    description: String,
-    onClick: () -> Unit
-) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
-    ) {
-        Button(
-            onClick = onClick,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(4.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Transparent,
-                contentColor = MaterialTheme.colorScheme.primary
-            ),
-            elevation = null
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Start
-            ) {
-                Icon(
-                    imageVector = icon,
-                    contentDescription = null,
-                    modifier = Modifier.size(32.dp)
-                )
-
-
-                Spacer(modifier = Modifier.width(16.dp))
-
-
-                Column(
-                    modifier = Modifier.weight(1f),
-                    horizontalAlignment = Alignment.Start
-                ) {
-                    Text(
-                        text = text,
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold
-                    )
-
-
-                    Text(
-                        text = description,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = TextSecondary
-                    )
-                }
             }
         }
     }

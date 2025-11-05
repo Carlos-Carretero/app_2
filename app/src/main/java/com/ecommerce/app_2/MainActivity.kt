@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -16,11 +17,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ecommerce.app_2.models.AuthResponse
-import com.ecommerce.app_2.ui.screens.LocationManagementScreen
 import com.ecommerce.app_2.ui.screens.LoginScreen
-import com.ecommerce.app_2.ui.screens.ProfileScreen
 import com.ecommerce.app_2.ui.screens.RegisterScreen
-import com.ecommerce.app_2.ui.screens.UserManagementScreen
 import com.ecommerce.app_2.ui.screens.WelcomeScreen
 import com.ecommerce.app_2.ui.theme.EcommerceAppTheme
 import com.ecommerce.app_2.utils.SessionManager
@@ -69,7 +67,6 @@ fun EcommerceApp(
         startDestination = if (isLoggedIn) "welcome" else "login",
         modifier = modifier
     ) {
-        // Pantalla de Login
         composable("login") {
             LoginScreen(
                 onLoginSuccess = { authResponse ->
@@ -103,7 +100,6 @@ fun EcommerceApp(
         }
 
 
-        // Pantalla de Registro
         composable("register") {
             RegisterScreen(
                 onRegisterSuccess = { email ->
@@ -125,7 +121,6 @@ fun EcommerceApp(
         }
 
 
-        // Pantalla Principal (Welcome)
         composable("welcome") {
             WelcomeScreen(
                 sessionManager = sessionManager,
@@ -133,47 +128,6 @@ fun EcommerceApp(
                     navController.navigate("login") {
                         popUpTo("welcome") { inclusive = true }
                     }
-                },
-                onNavigateToProfile = {
-                    navController.navigate("profile")
-                },
-                onNavigateToUserManagement = {
-                    navController.navigate("user_management")
-                },
-                onNavigateToLocationManagement = {
-                    navController.navigate("location_management")
-                }
-            )
-        }
-
-
-        // Pantalla de Perfil
-        composable("profile") {
-            ProfileScreen(
-                sessionManager = sessionManager,
-                onNavigateBack = {
-                    navController.popBackStack()
-                }
-            )
-        }
-
-
-        // Pantalla de Gestión de Usuarios (Solo Admin)
-        composable("user_management") {
-            UserManagementScreen(
-                sessionManager = sessionManager,
-                onNavigateBack = {
-                    navController.popBackStack()
-                }
-            )
-        }
-
-
-        // Pantalla de Gestión de Ubicaciones (Solo Admin)
-        composable("location_management") {
-            LocationManagementScreen(
-                onNavigateBack = {
-                    navController.popBackStack()
                 }
             )
         }
