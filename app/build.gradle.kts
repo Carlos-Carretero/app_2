@@ -9,14 +9,14 @@ plugins {
 
 
 android {
-    namespace = "com.ecommerce.app_2" //Cambiar Package de inicio al momento de crear proyecto
+    namespace = "com.ecommerce.ecomerce" //Cambiar Package de inicio al momento de crear proyecto
     compileSdk = 36
 
 
 
 
     defaultConfig {
-        applicationId = "com.ecommerce.app_2" //Cambiar Package de inicio al momento de crear proyecto
+        applicationId = "com.ecommerce.ecomerce" //Cambiar Package de inicio al momento de crear proyecto
         minSdk = 24
         targetSdk = 36
         versionCode = 1

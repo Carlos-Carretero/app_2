@@ -39,10 +39,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.ecommerce.ecommerceapp.models.AuthResponse
-import com.ecommerce.ecommerceapp.ui.components.LoadingButton
-import com.ecommerce.ecommerceapp.ui.theme.Primary
-import com.ecommerce.ecommerceapp.viewmodels.LoginViewModel
+import com.ecommerce.app_2.models.AuthResponse
+import com.ecommerce.app_2.ui.components.LoadingButton
+import com.ecommerce.app_2.ui.theme.Primary
+import com.ecommerce.app_2.viewmodels.LoginViewModel
 
 
 @Composable
